@@ -2,6 +2,7 @@
 
 const fs = require("fs");
 const inquirer = require("inquirer");
+const consoleTable = require("console.table");
 
 // inquirer function
     // .prompt
