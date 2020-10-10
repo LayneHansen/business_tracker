@@ -1,0 +1,30 @@
+{
+  "name": "business_tracker",
+  "version": "1.0.0",
+  "description": "This application allows the user to sort their business by department, role, employee; add departments, roles, and employees, and update employee information.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LayneHansen/business_tracker.git"
+  },
+  "keywords": [
+    "employee",
+    "business",
+    "department",
+    "manager",
+    "role"
+  ],
+  "author": "Layne D. Hansen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LayneHansen/business_tracker/issues"
+  },
+  "homepage": "https://github.com/LayneHansen/business_tracker#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3",
+    "mysql": "^2.18.1"
+  }
+}
