@@ -11,7 +11,7 @@ inquirer
     .prompt ([
     {
         type: "list",
-        name: "view",
+        name: "action",
         message: "What would you like to do?",
         choices: 
             [
