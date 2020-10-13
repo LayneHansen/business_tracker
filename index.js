@@ -118,8 +118,6 @@ function runSearch() {
                 console.log("The department was created successfully!");
                 runSearch();
             })
-            // console.log(data);
-
         })
     };
     
@@ -162,7 +160,7 @@ function runSearch() {
                 {
                 name: "manager_id",
                 type: "input",
-                message: "Who is the employee's manager? 1) Mike Jones 2) Marge Gundersen 3) Billy Batts 4) Willy Umerrymee:",
+                message: "Who is the employee's manager? [Select Number] 1) Mike Jones 2) Marge Gundersen 3) Billy Batts 4) Willy Umerrymee:",
                 },
             ])
             .then(function(data) {
@@ -182,6 +180,40 @@ function runSearch() {
             });
         }
 
+        function addRole() {
+            inquirer    
+                .prompt ([
+                    {
+                        name: "title",
+                        type: "input",
+                        message: "What is the name of the new role?"
+                    },
+                    {
+                        name: "salary",
+                        type: "input",
+                        message: "What is the salary of the new role?"
+                    },
+                    {
+                        name: "department_id",
+                        type: "input",
+                        message: "Which department is the new role in? 1) Human Resources 2) Billing 3) Shipping 4) Receiving [Select Number]",
+                    },
+                ])
+                .then(function(data) {
+                    connection.query("INSERT INTO role SET ?",
+                    {
+                        title: data.title,
+                        salary: data.salary,
+                        department_id: data.department_id
+                    },
+                    function(err) {
+                        if (err) throw err;
+                        console.log("The role was created successfully!");
+                        runSearch();
+                    })
+                })
+        }
+
     /*
     
     function updateEmployee() {
@@ -196,26 +228,10 @@ function runSearch() {
             })
         }
     
-    function addRole() {
-        inquirer    
-            .prompt ({
-                name: "addRole",
-                type: "list"
-                choices: 
-                    [
-                        ""
-                    ]
-            })
-        }
-
-
     
-    // function to add department
-    // function for when employees don't exist
-    // function to add employee
+
     // function to update employee
-    // function for when roles don't exist
-    // function to add role
+
 
 
 
