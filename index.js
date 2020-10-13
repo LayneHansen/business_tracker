@@ -68,7 +68,7 @@ function runSearch() {
                 break;
             }
         })
-}    
+};    
     // function for when department doesn't exist
     // function to see current departments
     
@@ -104,15 +104,24 @@ function runSearch() {
     function addDepartment() {
         inquirer    
         .prompt ({
-            name: "addDepartment",
+            name: "department_id",
             type: "input",
             message: "What is the name of the new department?"
         })
         .then(function(data) {
-            connection.query("INSERT INTO deparment WHERE ?",)
+            connection.query("INSERT INTO department SET ?",
+            {
+                name: data.department_id
+            },
+            function(err) {
+                if (err) throw err;
+                console.log("The department was created successfully!");
+                runSearch();
+            })
+            // console.log(data);
 
         })
-    }
+    };
     
     function viewEmployee() {
         var query = "SELECT * FROM employee INNER JOIN department ON employee.id = department.id INNER JOIN role ON department.id = role.id";
@@ -121,10 +130,9 @@ function runSearch() {
             // for (var i = 0; i < res.length; i++) {
             // console.log("ID: " + res[i].id + " Name: " + res[i].name);
             console.table(res);
+            runSearch();
             })
-        runSearch();
-
-    }
+    };
         
     function addEmployee() {
         inquirer    
@@ -169,23 +177,12 @@ function runSearch() {
                   function(err) {
                     if (err) throw err;
                     console.log("The employee was created successfully!");
-                    // re-prompt the user for if they want to bid or post
                     runSearch();
                 });
             });
         }
+
     /*
-    function addDepartment() {
-        inquirer    
-            .prompt ({
-                name: "addDepartment",
-                type: "list",
-                choices: 
-                    [
-                        ""
-                    ]
-            })
-        }
     
     function updateEmployee() {
         inquirer    
