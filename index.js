@@ -122,14 +122,14 @@ function runSearch() {
     };
     
     function viewEmployee() {
-        var query = "SELECT * FROM employee INNER JOIN department ON employee.id = department.id INNER JOIN role ON department.id = role.id";
+        var query = "SELECT * FROM employee AS e LEFT JOIN role as r ON e.role_id = r.id";
         connection.query(query, function (err, res) {
             if (err) throw err;
             // for (var i = 0; i < res.length; i++) {
             // console.log("ID: " + res[i].id + " Name: " + res[i].name);
             console.table(res);
             runSearch();
-            })
+        })
     };
         
     function addEmployee() {
