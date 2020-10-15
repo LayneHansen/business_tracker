@@ -161,16 +161,53 @@ function addEmployee() {
 
 // update employees roles
 function updateEmployee() {
-    inquirer
-        .prompt ({
-            name: "updateEmployee",
-            type: "list"
-            choices:
-                [
-                    ""
-                ]
+    // get list of employees
+    var query = "SELECT * FROM employee AS e LEFT JOIN role as r ON e.role_id = r.id";
+    connection.query(query, async function (err, resEmp) {
+        if (err) throw err;
+        console.log(resEmp);
+
+        var mapEmp = resEmp;
+        var newMapEmp = mapEmp.map(employee => employee.first_name + " " + employee.last_name);
+
+        var empName = await inquirer
+            .prompt([
+                {
+                    name: "update",
+                    type: "list",
+                    message: "Which employee would you like to update?",
+                    choices: newMapEmp
+                }
+            ])
+            
+            var query = "SELECT * FROM role";
+            connection.query(query, async function (err, resRole) {
+                if (err) throw err;
+                console.log(resRole);
+                
+                var mapRole = resRole;
+                var newMapRole = mapRole.map(role => role.title);
+                
+                var roleName = await inquirer
+                .prompt([
+                    {
+                        name: "update",
+                        type: "list",
+                        message: "Which role would you like to update?",
+                        choices: newMapRole
+                    }
+                ])
+                console.log("It's Alive", empName);
+                console.log("It's Alive 2", roleName);
+
+            // UPDATE query
+            // Be able to get employee ID from employee name empName
+            // Be able to get role ID from role name roleName
+                var query = "UPDATE employee SET role_id = ? WHERE ";
+            runSearch();
         })
-    }
+    })
+};
 
 // view the available roles
 function viewRole() {
