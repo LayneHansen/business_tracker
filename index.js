@@ -18,8 +18,7 @@ connection.connect(function (err) {
     runSearch();
 });
 
-// inquirer function
-
+// base run function
 function runSearch() {
     inquirer
         .prompt({
@@ -33,7 +32,7 @@ function runSearch() {
                     "View Employee",
                     "Add Employee",
                     "Update Employee",
-                    "View Roles",
+                    "View Role",
                     "Add Role"
                 ]
         })
@@ -60,7 +59,7 @@ function runSearch() {
                     break;
 
                 case "View Role":
-                    addDepartment();
+                    viewRole();
                     break;
 
                 case "Add Role":
@@ -70,9 +69,8 @@ function runSearch() {
         })
 };
 
-// function for when department doesn't exist
-// function to see current departments
 
+// function to see current departments
 function viewDepartment() {
     var query = "SELECT * FROM department";
     connection.query(query, function (err, res) {
@@ -80,7 +78,7 @@ function viewDepartment() {
         console.table(res);
         runSearch();
     });
-}
+};
 
 function addDepartment() {
     inquirer
@@ -102,6 +100,7 @@ function addDepartment() {
         })
 };
 
+// view all employees
 function viewEmployee() {
     var query = "SELECT * FROM employee AS e LEFT JOIN role as r ON e.role_id = r.id";
     connection.query(query, function (err, res) {
@@ -111,6 +110,7 @@ function viewEmployee() {
     })
 };
 
+// add a new employee
 function addEmployee() {
     inquirer
         .prompt([
@@ -157,8 +157,32 @@ function addEmployee() {
                     runSearch();
                 });
         });
-}
+};
 
+// update employees roles
+function updateEmployee() {
+    inquirer
+        .prompt ({
+            name: "updateEmployee",
+            type: "list"
+            choices:
+                [
+                    ""
+                ]
+        })
+    }
+
+// view the available roles
+function viewRole() {
+    var query = "SELECT * FROM role";
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        runSearch();
+    })
+};
+
+// add a new role to the company as it expands
 function addRole() {
     inquirer
         .prompt([
@@ -196,25 +220,5 @@ function addRole() {
 
 
 
-    // function updateEmployee() {
-    //     inquirer
-    //         .prompt ({
-    //             name: "updateEmployee",
-    //             type: "list"
-    //             choices:
-    //                 [
-    //                     ""
-    //                 ]
-    //         })
-    //     }
-
-
-
-    // function to update employee
-
-
-
-
-    // .then
 
 
