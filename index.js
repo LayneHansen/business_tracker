@@ -31,7 +31,7 @@ function runSearch() {
                     "Add Department",
                     "View Employee",
                     "Add Employee",
-                    "Update Employee",
+                    // "Update Employee",
                     "View Role",
                     "Add Role"
                 ]
@@ -54,9 +54,9 @@ function runSearch() {
                     addEmployee();
                     break;
 
-                case "Update Employee":
-                    updateEmployee();
-                    break;
+                // case "Update Employee":
+                //     updateEmployee();
+                //     break;
 
                 case "View Role":
                     viewRole();
@@ -128,13 +128,6 @@ function addEmployee() {
                 name: "role_id",
                 type: "input",
                 message: "What is the employee's role? 1) Manager 2) Supervisor 3) Associate 4) Engineer:",
-                // choices: 
-                // [
-                //     "Manager",
-                //     "Supervisor",
-                //     "Associate",
-                //     "Engineer"
-                // ]
             },
             {
                 name: "manager_id",
@@ -159,10 +152,11 @@ function addEmployee() {
         });
 };
 
+/*
 // update employees roles
 function updateEmployee() {
     // get list of employees
-    var query = "SELECT * FROM employee AS e LEFT JOIN role as r ON e.role_id = r.id";
+    var query = "SELECT * FROM employee";
     connection.query(query, async function (err, resEmp) {
         if (err) throw err;
         console.log(resEmp);
@@ -197,17 +191,24 @@ function updateEmployee() {
                         choices: newMapRole
                     }
                 ])
-                console.log("It's Alive", empName);
-                console.log("It's Alive 2", roleName);
+                // console.log("It's Alive", empName);
+                // console.log("It's Alive 2", roleName);
 
             // UPDATE query
             // Be able to get employee ID from employee name empName
             // Be able to get role ID from role name roleName
-                var query = "UPDATE employee SET role_id = ? WHERE ";
-            runSearch();
+                var query = "UPDATE employee SET role_id = ? WHERE id = ?";
+                console.log("I's here", newMapRole, empName);
+                connection.query(query, [roleName, empName], function (err, res) {
+                if (err) throw err;
+                console.log("The employee was updated successfully!");
+                runSearch();
+            })
         })
-    })
-};
+    });
+
+}
+*/
 
 // view the available roles
 function viewRole() {
@@ -253,9 +254,5 @@ function addRole() {
                 })
         })
 };
-
-
-
-
 
 
