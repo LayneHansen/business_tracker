@@ -20,6 +20,14 @@ connection.connect(function (err) {
 
 // base run function
 function runSearch() {
+
+    // console.log("  ____            _                       _______             _             ");
+    // console.log(" |  _ \          (_)                     |__   __|           | |            ");
+    // console.log(" | |_) |_   _ ___ _ _ __   ___  ___ ___     | |_ __ __ _  ___| | _____ _ __ ");
+    // console.log(" |  _ <| | | / __| | '_ \ / _ \/ __/ __|    | | '__/ _` |/ __| |/ / _ \ '__|");
+    // console.log(" | |_) | |_| \__ \ | | | |  __/\__ \__ \    | | | | (_| | (__|   <  __/ |   ");
+    // console.log(" |____/ \__,_|___/_|_| |_|\___||___/___/    |_|_|  \__,_|\___|_|\_\___|_|   ");
+
     inquirer
         .prompt({
             name: "action",
@@ -31,7 +39,7 @@ function runSearch() {
                     "Add Department",
                     "View Employee",
                     "Add Employee",
-                    // "Update Employee",
+                    "Update Employee",
                     "View Role",
                     "Add Role"
                 ]
@@ -54,9 +62,9 @@ function runSearch() {
                     addEmployee();
                     break;
 
-                // case "Update Employee":
-                //     updateEmployee();
-                //     break;
+                case "Update Employee":
+                    updateEmployee();
+                    break;
 
                 case "View Role":
                     viewRole();
@@ -152,17 +160,17 @@ function addEmployee() {
         });
 };
 
-/*
+
 // update employees roles
 function updateEmployee() {
     // get list of employees
-    var query = "SELECT * FROM employee";
+    var query = "SELECT id, concat (first_name, ' ', last_name) AS name FROM employee";
     connection.query(query, async function (err, resEmp) {
         if (err) throw err;
         console.log(resEmp);
 
         var mapEmp = resEmp;
-        var newMapEmp = mapEmp.map(employee => employee.first_name + " " + employee.last_name);
+        var newMapEmp = mapEmp.map(employee => employee.name);
 
         var empName = await inquirer
             .prompt([
@@ -191,15 +199,15 @@ function updateEmployee() {
                         choices: newMapRole
                     }
                 ])
-                // console.log("It's Alive", empName);
-                // console.log("It's Alive 2", roleName);
 
             // UPDATE query
-            // Be able to get employee ID from employee name empName
-            // Be able to get role ID from role name roleName
+                var updateRole = resRole.filter(newRole => roleName.update === newRole.title); 
+                var updateName = resEmp.filter(newEmp => empName.update === newEmp.name);
+                console.log("Here", updateRole[0].id);
+                console.log("Also Here", updateName[0].id);
                 var query = "UPDATE employee SET role_id = ? WHERE id = ?";
-                console.log("I's here", newMapRole, empName);
-                connection.query(query, [roleName, empName], function (err, res) {
+                console.log("I's here", roleName, empName);
+                connection.query(query, [updateRole[0].id, updateName[0].id], function (err, res) {
                 if (err) throw err;
                 console.log("The employee was updated successfully!");
                 runSearch();
@@ -208,7 +216,7 @@ function updateEmployee() {
     });
 
 }
-*/
+
 
 // view the available roles
 function viewRole() {
