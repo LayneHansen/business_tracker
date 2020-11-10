@@ -11,6 +11,12 @@
 * [License](#license)
 * [Questions](#questions)
 
+![Screenshot of node app](./business_tracker.png)
+
+## Demo Video
+
+https://www.youtube.com/watch?v=DbuvnEO3Q8o&feature=youtu.be
+
 ## Description
 This application allows the user to track their business: departments, employyees, and their roles. It also allows them to add new departments, roles, and employees.
 
