@@ -11,7 +11,7 @@
 * [License](#license)
 * [Questions](#questions)
 
-![Screenshot of node app](./business_tracker.png)
+![Screenshot of node app](./business_tracker_screenshot.png)
 
 ## Demo Video
 
